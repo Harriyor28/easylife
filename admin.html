@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Life Admin Control Panel</title>
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar Navigation -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+                <button class="logout-btn" id="logoutBtn">Logout</button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#dashboard" class="nav-link active" data-section="dashboard">📊 Dashboard</a></li>
+                    <li><a href="#company" class="nav-link" data-section="company">🏢 Company Info</a></li>
+                    <li><a href="#contact" class="nav-link" data-section="contact">📞 Contact Details</a></li>
+                    <li><a href="#branding" class="nav-link" data-section="branding">🎨 Branding</a></li>
+                    <li><a href="#services" class="nav-link" data-section="services">⚡ Services</a></li>
+                    <li><a href="#testimonials" class="nav-link" data-section="testimonials">⭐ Testimonials</a></li>
+                    <li><a href="#hero" class="nav-link" data-section="hero">🎯 Hero Section</a></li>
+                    <li><a href="#settings" class="nav-link" data-section="settings">⚙️ Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <h1>Easy Life Electrician Consult - Admin Control Panel</h1>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="previewBtn">👁️ Preview Site</button>
+                    <button class="btn btn-primary" id="saveAllBtn">💾 Save All Changes</button>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <h2>Dashboard</h2>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>📝 Quick Stats</h3>
+                        <p><strong>Services:</strong> <span id="serviceCount">0</span></p>
+                        <p><strong>Testimonials:</strong> <span id="testimonialCount">0</span></p>
+                        <p><strong>Last Updated:</strong> <span id="lastUpdated">Never</span></p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>🎯 Quick Actions</h3>
+                        <button class="btn btn-small" onclick="scrollToSection('company')">Edit Company Info</button>
+                        <button class="btn btn-small" onclick="scrollToSection('contact')">Update Contact</button>
+                        <button class="btn btn-small" onclick="scrollToSection('branding')">Change Logo</button>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>💾 Backup & Export</h3>
+                        <button class="btn btn-small" id="exportBtn">📥 Export Data</button>
+                        <button class="btn btn-small" id="importBtn">📤 Import Data</button>
+                        <input type="file" id="importFile" style="display:none;" accept=".json">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Company Info Section -->
+            <section id="company" class="content-section">
+                <h2>Company Information</h2>
+                <form class="form-group">
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="companyName">Company Name</label>
+                            <input type="text" id="companyName" placeholder="Easy Life Electrician Consult">
+                        </div>
+                        <div class="form-column">
+                            <label for="tagline">Tagline</label>
+                            <input type="text" id="tagline" placeholder="Powering Homes, Businesses, and a Sustainable Future.">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="heroHeadline">Hero Headline</label>
+                            <input type="text" id="heroHeadline" placeholder="Professional Electrical & Solar Installation Services">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="heroSubtitle">Hero Subtitle</label>
+                            <textarea id="heroSubtitle" rows="4" placeholder="Easy Life Electrician Consult provides..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="aboutText">About Us Description</label>
+                            <textarea id="aboutText" rows="4" placeholder="Easy Life Electrician Consult is a professional..."></textarea>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="saveCompanyInfo()">Save Company Info</button>
+                </form>
+            </section>
+
+            <!-- Contact Details Section -->
+            <section id="contact" class="content-section">
+                <h2>Contact Information</h2>
+                <form class="form-group">
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="+234 700 000 0000">
+                        </div>
+                        <div class="form-column">
+                            <label for="whatsapp">WhatsApp Number</label>
+                            <input type="tel" id="whatsapp" placeholder="+2347000000000">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="info@easylifeelectrician.com">
+                        </div>
+                        <div class="form-column">
+                            <label for="address">Office Address</label>
+                            <input type="text" id="address" placeholder="Lagos, Nigeria">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="serviceAreas">Service Areas</label>
+                            <input type="text" id="serviceAreas" placeholder="All States in Nigeria">
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="saveContactInfo()">Save Contact Details</button>
+                </form>
+            </section>
+
+            <!-- Branding Section -->
+            <section id="branding" class="content-section">
+                <h2>Branding & Colors</h2>
+                <form class="form-group">
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="logoUpload">Upload Logo</label>
+                            <input type="file" id="logoUpload" accept="image/*">
+                            <div id="logoPreview" class="logo-preview">
+                                <img id="logoImg" src="" alt="Logo Preview" style="max-height: 100px; display: none;">
+                                <p id="logoPlaceholder">No logo uploaded</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <h3>Brand Colors</h3>
+
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="primaryColor">Primary Blue</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="primaryColor" value="#1e3a8a">
+                                <input type="text" id="primaryColorText" value="#1e3a8a" readonly>
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <label for="secondaryColor">Electric Yellow</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="secondaryColor" value="#fbbf24">
+                                <input type="text" id="secondaryColorText" value="#fbbf24" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="darkGrayColor">Dark Gray</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="darkGrayColor" value="#374151">
+                                <input type="text" id="darkGrayColorText" value="#374151" readonly>
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <label for="lightGrayColor">Light Gray</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="lightGrayColor" value="#f3f4f6">
+                                <input type="text" id="lightGrayColorText" value="#f3f4f6" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="saveBranding()">Save Branding</button>
+                </form>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services" class="content-section">
+                <h2>Manage Services</h2>
+                <div class="services-management">
+                    <button class="btn btn-primary" id="addServiceBtn">+ Add New Service</button>
+                </div>
+                <div id="servicesList" class="services-list"></div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section id="testimonials" class="content-section">
+                <h2>Manage Testimonials</h2>
+                <div class="testimonials-management">
+                    <button class="btn btn-primary" id="addTestimonialBtn">+ Add New Testimonial</button>
+                </div>
+                <div id="testimonialsList" class="testimonials-list"></div>
+            </section>
+
+            <!-- Hero Section -->
+            <section id="hero" class="content-section">
+                <h2>Hero Section Settings</h2>
+                <form class="form-group">
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="heroImage">Hero Background Image</label>
+                            <input type="file" id="heroImage" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="cta1Text">CTA Button 1 Text</label>
+                            <input type="text" id="cta1Text" value="Request a Quote">
+                        </div>
+                        <div class="form-column">
+                            <label for="cta2Text">CTA Button 2 Text</label>
+                            <input type="text" id="cta2Text" value="Contact Us">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="cta3Text">CTA Button 3 Text</label>
+                            <input type="text" id="cta3Text" value="Book a Service">
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="saveHeroSettings()">Save Hero Settings</button>
+                </form>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="content-section">
+                <h2>Settings</h2>
+                <form class="form-group">
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="adminPassword">Admin Password</label>
+                            <input type="password" id="adminPassword" placeholder="Enter new admin password">
+                            <small>Leave blank to keep current password</small>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label>
+                                <input type="checkbox" id="enableMaintenance"> Enable Maintenance Mode
+                            </label>
+                            <small>Visitors will see a maintenance message</small>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <h3>Danger Zone</h3>
+                    <button type="button" class="btn btn-danger" id="resetBtn">🔄 Reset to Default</button>
+                    <small>This will reset all changes to default values</small>
+
+                    <hr>
+                    <button type="button" class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- Service Modal -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('serviceModal')">&times;</span>
+            <h2>Add/Edit Service</h2>
+            <form class="form-group">
+                <div class="form-row">
+                    <div class="form-column">
+                        <label for="serviceIcon">Service Icon/Emoji</label>
+                        <input type="text" id="serviceIcon" placeholder="⚡">
+                    </div>
+                    <div class="form-column">
+                        <label for="serviceName">Service Name</label>
+                        <input type="text" id="serviceName" placeholder="House Wiring">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-column">
+                        <label for="serviceDescription">Service Description</label>
+                        <textarea id="serviceDescription" rows="3" placeholder="Professional residential wiring installations..."></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-column">
+                        <label for="serviceCategory">Category</label>
+                        <select id="serviceCategory">
+                            <option value="electrical">Electrical Services</option>
+                            <option value="solar">Solar Energy Services</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="saveService()">Save Service</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Testimonial Modal -->
+    <div id="testimonialModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('testimonialModal')">&times;</span>
+            <h2>Add/Edit Testimonial</h2>
+            <form class="form-group">
+                <div class="form-row">
+                    <div class="form-column">
+                        <label for="testimonialName">Customer Name</label>
+                        <input type="text" id="testimonialName" placeholder="John Chisom">
+                    </div>
+                    <div class="form-column">
+                        <label for="testimonialTitle">Customer Title</label>
+                        <input type="text" id="testimonialTitle" placeholder="Homeowner">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-column">
+                        <label for="testimonialText">Testimonial Text</label>
+                        <textarea id="testimonialText" rows="4" placeholder="Easy Life Electrician Consult..."></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-column">
+                        <label for="testimonialRating">Rating</label>
+                        <select id="testimonialRating">
+                            <option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
+                            <option value="4">⭐⭐⭐⭐ 4 Stars</option>
+                            <option value="3">⭐⭐⭐ 3 Stars</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="saveTestimonial()">Save Testimonial</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal" style="display: flex;">
+        <div class="modal-content login-modal">
+            <h2>Admin Login</h2>
+            <form class="form-group" onsubmit="handleLogin(event)">
+                <div class="form-row">
+                    <div class="form-column">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter admin password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <p id="loginError" style="color: #dc2626; display: none;">Invalid password</p>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
